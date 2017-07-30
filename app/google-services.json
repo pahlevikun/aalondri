@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "569534289071",
+    "firebase_url": "https://aalondri-38bfc.firebaseio.com",
+    "project_id": "aalondri-38bfc",
+    "storage_bucket": "aalondri-38bfc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:569534289071:android:fcbee1431645a2ef",
+        "android_client_info": {
+          "package_name": "com.waperr.aalaundry"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "569534289071-qt8q773vdcfcu49l08mhkpjfmgdodcqs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3YPb9_vh3jEK2-slN-71yJPKP84PYi9g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:569534289071:android:c127a430813e89b6",
+        "android_client_info": {
+          "package_name": "com.waperr.kuriraalondri"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "569534289071-qt8q773vdcfcu49l08mhkpjfmgdodcqs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3YPb9_vh3jEK2-slN-71yJPKP84PYi9g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
