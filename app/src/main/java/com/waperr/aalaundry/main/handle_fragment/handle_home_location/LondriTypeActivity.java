@@ -274,6 +274,8 @@ public class LondriTypeActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
 
+                Log.d("RESPON","hasil "+response);
+
                 try {
                     JSONObject jObj = new JSONObject(response);
                     boolean error = jObj.getBoolean("error");

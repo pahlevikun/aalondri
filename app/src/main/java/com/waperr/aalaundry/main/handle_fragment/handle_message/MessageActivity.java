@@ -94,14 +94,17 @@ public class MessageActivity extends AppCompatActivity {
                     JSONObject jObj = new JSONObject(response);
                     boolean error = jObj.getBoolean("error");
                     if(!error){
+                        valuesChat.clear();
                         JSONArray jArray = jObj.getJSONArray("data");
                         for (int i=0; i<jArray.length();i++){
                             JSONObject data = jArray.getJSONObject(i);
                             String id = data.getString("id");
                             String sender_id = data.getString("sender_id");
                             String receiver_id = data.getString("receiver_id");
+                            String sender_name = data.getString("sender_name");
+                            String receiver_name = data.getString("receiver_name");
                             String content = data.getString("content");
-                            valuesChat.add(new Chats(id,content,sender_id,receiver_id,""));
+                            valuesChat.add(new Chats(id,sender_id,receiver_id,sender_name,receiver_name,content));
                         }
                     }
                 } catch (JSONException e) {
@@ -148,7 +151,7 @@ public class MessageActivity extends AppCompatActivity {
     public void sendChat(final String order_id, final String user_id, final String mitra_id, final String content){
         String tag_string_req = "req_login";
 
-        StringRequest strReq = new StringRequest(Request.Method.POST, APIConfig.API_CHAT_READ, new Response.Listener<String>() {
+        StringRequest strReq = new StringRequest(Request.Method.POST, APIConfig.API_CHAT_SEND, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {

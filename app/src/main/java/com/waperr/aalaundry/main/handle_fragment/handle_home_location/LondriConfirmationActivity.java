@@ -221,6 +221,8 @@ public class LondriConfirmationActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 hideDialog();
 
+                Log.d("RESPON","hasil "+response);
+
                 try {
                     JSONObject jObj = new JSONObject(response);
                     String error = jObj.getString("error");
@@ -255,6 +257,7 @@ public class LondriConfirmationActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getApplicationContext(), "Gagal Terhubung ke Server", Toast.LENGTH_LONG).show();
                 hideDialog();
+                Log.d("RESPON","hasil "+error);
             }
         }) {
             @Override

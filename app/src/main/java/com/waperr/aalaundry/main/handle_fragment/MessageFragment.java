@@ -25,11 +25,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.waperr.aalaundry.R;
 import com.waperr.aalaundry.adapter.HistoryAdapter;
+import com.waperr.aalaundry.adapter.MessageAdapter;
 import com.waperr.aalaundry.config.APIConfig;
 import com.waperr.aalaundry.config.AppController;
 import com.waperr.aalaundry.database.DatabaseHandler;
 import com.waperr.aalaundry.main.handle_fragment.handle_history_fragment.HistoryDetailActivity;
 import com.waperr.aalaundry.pojo.History;
+import com.waperr.aalaundry.pojo.Message;
 import com.waperr.aalaundry.pojo.Profil;
 
 import org.json.JSONArray;
@@ -53,11 +55,11 @@ public class MessageFragment extends Fragment {
 
     private ProgressDialog loading;
 
-    private String invoice, layanan, cek, token, selected;
+    private String invoice, layanan, cek, token, selected, namauser;
     private LinearLayout linRiwayat;
-    private HistoryAdapter adapter;
+    private MessageAdapter adapter;
 
-    private List<History> dataList = new ArrayList<History>();
+    private List<Message> dataList = new ArrayList<Message>();
 
 
     public MessageFragment() {
@@ -96,7 +98,7 @@ public class MessageFragment extends Fragment {
         dataSource = new DatabaseHandler(getActivity());
         valuesProfil = (ArrayList<Profil>) dataSource.getAllProfils();
 
-        adapter = new HistoryAdapter(getActivity(), dataList);
+        adapter = new MessageAdapter(getActivity(), dataList);
         dataList.clear();
         lv.setAdapter(adapter);
 
@@ -108,6 +110,7 @@ public class MessageFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), HistoryDetailActivity.class);
                 intent.putExtra("idOrder",dataList.get(position).getIdOrder());
                 intent.putExtra("idMitra",dataList.get(position).getIdMitra());
+                intent.putExtra("idUser",dataList.get(position).getIdUser());
                 startActivity(intent);
             }
         });
@@ -117,13 +120,16 @@ public class MessageFragment extends Fragment {
 
     private void makeJsonObjectRequest() {
 
+        dataList.clear();
+
 
         for (Profil profil : valuesProfil) {
             token = profil.getToken();
+            namauser = profil.getUsername();
         }
         loading = ProgressDialog.show(getActivity(),"Mohon Tunggu","Sedang memuat...",false,false);
 
-        StringRequest jsonObjReq = new StringRequest(Request.Method.GET, APIConfig.API_HISTORY_V2, new Response.Listener<String>() {
+        StringRequest jsonObjReq = new StringRequest(Request.Method.GET, APIConfig.API_LIST_CHAT, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -134,7 +140,7 @@ public class MessageFragment extends Fragment {
                     boolean error = jObj.getBoolean("error");
                     if (!error) {
                         JSONArray dataArray = jObj.getJSONArray("data");
-                        try {
+                        /*try {
                             for (int i = 0; i < dataArray.length(); i++) {
                                 JSONObject isi = dataArray.getJSONObject(i);
                                 String id = isi.getString("id");
@@ -197,6 +203,20 @@ public class MessageFragment extends Fragment {
                         } catch (JSONException e) {
                             Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
                             Log.d("ERROR",""+e);
+                        }*/
+                        if (!error) {
+                            JSONArray message = jObj.getJSONArray("message");
+                            for (int i = 0; i < message.length(); i++){
+                                JSONObject object = message.getJSONObject(i);
+                                String id = object.getString("id");
+                                String user_id = object.getString("user_id");
+                                String kurir_id = object.getString("kurir_id");
+                                String mitra_id = object.getString("mitra_id");
+                                JSONObject detail = object.getJSONObject("detail");
+                                String nama_alias = detail.getString("nama_alias");
+                                String invoice_number = detail.getString("invoice_number");
+                                dataList.add(new Message(i+"",id,user_id,kurir_id,mitra_id,namauser,nama_alias,invoice_number));
+                            }
                         }
                     }
                 } catch (JSONException e) {
