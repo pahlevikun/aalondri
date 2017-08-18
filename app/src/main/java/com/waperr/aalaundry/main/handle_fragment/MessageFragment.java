@@ -111,6 +111,7 @@ public class MessageFragment extends Fragment {
                 intent.putExtra("idOrder",dataList.get(position).getIdOrder());
                 intent.putExtra("idMitra",dataList.get(position).getIdMitra());
                 intent.putExtra("idUser",dataList.get(position).getIdUser());
+                intent.putExtra("invoice",dataList.get(position).getInvoice_number());
                 startActivity(intent);
             }
         });
@@ -138,9 +139,9 @@ public class MessageFragment extends Fragment {
                 try {
                     JSONObject jObj = new JSONObject(response);
                     boolean error = jObj.getBoolean("error");
-                    if (!error) {
+                    /*if (!error) {
                         JSONArray dataArray = jObj.getJSONArray("data");
-                        /*try {
+                        try {
                             for (int i = 0; i < dataArray.length(); i++) {
                                 JSONObject isi = dataArray.getJSONObject(i);
                                 String id = isi.getString("id");
@@ -203,20 +204,20 @@ public class MessageFragment extends Fragment {
                         } catch (JSONException e) {
                             Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
                             Log.d("ERROR",""+e);
-                        }*/
-                        if (!error) {
-                            JSONArray message = jObj.getJSONArray("message");
-                            for (int i = 0; i < message.length(); i++){
-                                JSONObject object = message.getJSONObject(i);
-                                String id = object.getString("id");
-                                String user_id = object.getString("user_id");
-                                String kurir_id = object.getString("kurir_id");
-                                String mitra_id = object.getString("mitra_id");
-                                JSONObject detail = object.getJSONObject("detail");
-                                String nama_alias = detail.getString("nama_alias");
-                                String invoice_number = detail.getString("invoice_number");
-                                dataList.add(new Message(i+"",id,user_id,kurir_id,mitra_id,namauser,nama_alias,invoice_number));
-                            }
+                        }
+                    }*/
+                    if (!error) {
+                        JSONArray message = jObj.getJSONArray("message");
+                        for (int i = 0; i < message.length(); i++){
+                            JSONObject object = message.getJSONObject(i);
+                            String id = object.getString("id");
+                            String user_id = object.getString("user_id");
+                            String kurir_id = object.getString("kurir_id");
+                            String mitra_id = object.getString("mitra_id");
+                            JSONObject detail = object.getJSONObject("detail");
+                            String nama_alias = detail.getString("nama_alias");
+                            String invoice_number = detail.getString("invoice_number");
+                            dataList.add(new Message(i+"",id,user_id,kurir_id,mitra_id,namauser,nama_alias,invoice_number));
                         }
                     }
                 } catch (JSONException e) {

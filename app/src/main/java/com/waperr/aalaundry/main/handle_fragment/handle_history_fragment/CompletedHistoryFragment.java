@@ -72,7 +72,7 @@ public class CompletedHistoryFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // TODO Add your menu entries here
-        inflater.inflate(R.menu.history, menu);
+        inflater.inflate(R.menu.main, menu);
     }
 
     @Override
