@@ -195,13 +195,6 @@ public class MessageFragment extends Fragment {
 
                                 }
                             }
-                            if (dataList.size()==0){
-                                lv.setVisibility(View.GONE);
-                                linRiwayat.setVisibility(View.VISIBLE);
-                            }else{
-                                lv.setVisibility(View.VISIBLE);
-                                linRiwayat.setVisibility(View.GONE);
-                            }
                         } catch (JSONException e) {
                             Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
                             Log.d("ERROR",""+e);
@@ -225,6 +218,13 @@ public class MessageFragment extends Fragment {
                     Toast.makeText(getActivity(), "" + e, Toast.LENGTH_SHORT).show();
                 }
                 adapter.notifyDataSetChanged();
+                if (dataList.size()==0){
+                    lv.setVisibility(View.GONE);
+                    linRiwayat.setVisibility(View.VISIBLE);
+                }else{
+                    lv.setVisibility(View.VISIBLE);
+                    linRiwayat.setVisibility(View.GONE);
+                }
             }
         }, new Response.ErrorListener() {
 

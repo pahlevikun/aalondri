@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -52,11 +53,18 @@ public class MessageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         listView = (ListView) findViewById(R.id.listViewChat);
         btn_send_msg = (Button)findViewById(R.id.button);
         input_msg = (EditText)findViewById(R.id.editText);
 
+
+        dataSource = new DatabaseHandler(MessageActivity.this);
+        valuesProfil = (ArrayList<Profil>) dataSource.getAllProfils();
         for (Profil profil : valuesProfil) {
             token = profil.getToken();
             idUser = String.valueOf(profil.getUserID());
