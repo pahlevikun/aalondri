@@ -30,6 +30,7 @@ import com.waperr.aalaundry.config.APIConfig;
 import com.waperr.aalaundry.config.AppController;
 import com.waperr.aalaundry.database.DatabaseHandler;
 import com.waperr.aalaundry.main.handle_fragment.handle_history_fragment.HistoryDetailActivity;
+import com.waperr.aalaundry.main.handle_fragment.handle_message.MessageActivity;
 import com.waperr.aalaundry.pojo.History;
 import com.waperr.aalaundry.pojo.Message;
 import com.waperr.aalaundry.pojo.Profil;
@@ -107,7 +108,7 @@ public class MessageFragment extends Fragment {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Intent intent = new Intent(getActivity(), HistoryDetailActivity.class);
+                Intent intent = new Intent(getActivity(), MessageActivity.class);
                 intent.putExtra("idOrder",dataList.get(position).getIdOrder());
                 intent.putExtra("idMitra",dataList.get(position).getIdMitra());
                 intent.putExtra("idUser",dataList.get(position).getIdUser());
