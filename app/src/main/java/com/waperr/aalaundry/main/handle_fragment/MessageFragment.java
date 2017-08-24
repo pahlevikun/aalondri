@@ -110,7 +110,7 @@ public class MessageFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Intent intent = new Intent(getActivity(), MessageActivity.class);
                 intent.putExtra("idOrder",dataList.get(position).getIdOrder());
-                intent.putExtra("idMitra",dataList.get(position).getIdMitra());
+                intent.putExtra("idMitra",dataList.get(position).getIdUser());
                 intent.putExtra("idUser",dataList.get(position).getIdUser());
                 intent.putExtra("invoice",dataList.get(position).getInvoice_number());
                 startActivity(intent);
